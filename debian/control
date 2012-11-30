@@ -1,0 +1,20 @@
+Source: python-graphiteudp
+Section: python
+Priority: optional
+Maintainer: Derp Ston <derpston+packaging@sleepygeek.org>
+Build-Depends:
+    debhelper (>= 6.0.0),
+    python-support (>= 0.90)
+Standards-Version: 3.9.1
+
+Package: python-graphiteudp
+Architecture: all
+Depends:
+    ${python:Depends},
+    ${misc:Depends},
+    python-socketcache
+Description: Python module for sending UDP packets to Graphite
+ Supports using a cache of socket objects to ensure minimal
+ impact on application performance, supports a debug mode where
+ metrics are dumped to logs instead, and handles network
+ errors by logging exceptions.

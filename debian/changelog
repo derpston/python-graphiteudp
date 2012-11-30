@@ -1,0 +1,11 @@
+python-graphiteudp (0.0.2) unstable; urgency=low
+
+  * Using python-socketcache to manage socket creation, DNS, etc, to avoid
+  needing a local caching resolver.
+
+ -- Derp Ston <derpston+packaging@sleepygeek.org>  Tue, 20 Nov 2011 05:00:00 +0000
+python-graphiteudp (0.0.1) unstable; urgency=low
+
+  * Initial release.
+
+ -- Derp Ston <derpston+packaging@sleepygeek.org>  Sat, 17 Nov 2011 15:00:00 +0000
