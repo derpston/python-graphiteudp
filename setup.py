@@ -14,5 +14,6 @@ and handles network errors by logging an exception."""
    ,  url = 'https://github.com/derpston/python-graphiteudp'
    ,  packages = ['']
    ,  package_dir = {'': 'src'}
+   ,  install_requires = ['socketcache']
    )
 
