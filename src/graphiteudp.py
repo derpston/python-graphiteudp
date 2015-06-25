@@ -27,9 +27,8 @@ class GraphiteUDPClient:
       if self._prefix is not None:
          message = self._prefix + "." + message
 
-      if self._debug:
-         logger.debug("%s -> %s" % (repr(message), repr(self._addr)))
-      else:
+      logger.debug("%s -> %s" % (repr(message), repr(self._addr)))
+      if not self._debug:
          try:
             (sock, addr) = self._host.get()
             sock.sendto(message, addr)
