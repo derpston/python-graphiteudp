@@ -32,8 +32,8 @@ class GraphiteUDPClient:
       else:
          try:
             (sock, addr) = self._host.get()
-            sock.sendto(message, addr)
-         except Exception, ex:
+            sock.sendto(message.encode(), addr)
+         except Exception as ex:
             logging.info("Failed to send graphite UDP message: %s" % ex)
 
 def init(*args, **kwargs):
