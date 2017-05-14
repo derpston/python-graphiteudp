@@ -47,6 +47,36 @@ g = graphiteudp.GraphiteUDPClient(...)
 g.send("foo", 1)
 ```
 
+#### As a context manager
+```python
+import graphiteudp
+graphiteudp.init(...)
+
+with graphiteudp.measure("sleep.time"):
+    time.sleep(5)
+```
+
+```python
+import graphiteudp
+graphiteudp.init(...)
+
+with graphiteudp.measure("sleep.time") as g:
+    g.send("foo", 1)
+    time.sleep(5)
+```
+
+#### As a decorator
+```python
+import time
+import graphiteudp
+
+@graphiteudp.measure('slow.function')
+def slow_function():
+  time.sleep(5)
+
+slow_function()
+```
+
 BUGS
 ----
 Unknown.
@@ -55,7 +85,6 @@ TODO
 ----
 * Should use the adns module for non-blocking DNS where available.
 * Should probably not depend on python-socketcache, but should use it where available.
-* Add a simple Timer class supporting ```with``` syntax (```__enter__``` and ```__exit__```)
 * Tests
 
 Contributing
