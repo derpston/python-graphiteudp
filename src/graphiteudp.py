@@ -4,6 +4,7 @@ import time
 import logging
 import warnings
 import socketcache
+from contextlib2 import contextmanager
 logger = logging.getLogger("graphiteudp")
 
 # If the user wants to use the module-level interface, this will hold a
@@ -45,3 +46,47 @@ def send(*args, **kwargs):
       _module_client.send(*args, **kwargs)
    else:
       warnings.warn("graphiteudp.send called before graphiteudp.init, metrics will be dropped.", RuntimeWarning, 2)
+
+
+@contextmanager
+def measure(metric, measure_func=time.time, reverse=False):
+   """
+   Function to allow usage of graphiteudp as both a context manager
+   and a decorator. Takes an optional measure_func argument which is
+   called before and after to obtain the `value` thats passed to
+   graphiteudp.send. Defaults to time.
+
+   Args:
+      metric: The metric path to use.
+      measure_func: The function thats called on entry and exit of the
+         context or before and after a decorated function when used as
+         a decorator.
+      reverse: Reverse the order of arguments used when obtainning
+         the difference.
+
+   Examples:
+
+      with graphite_measure('my.example.metric'):
+         time.sleep(5)
+
+      @graphite_measure('slow_function.time')
+      def slow_function():
+         time.sleep(5)
+
+      def get_memory():
+         return resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024
+
+      with graphite_measure('memory_usage', get_memory):
+         _ = [x for x in range(100000)]
+   """
+   try:
+      before = measure_func()
+      yield _module_client
+
+   finally:
+      if reverse:
+         value = before - measure_func()
+      else:
+         value = measure_func() - before
+
+      send(metric, value)
