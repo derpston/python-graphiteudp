@@ -10,7 +10,7 @@ Features
 * Supports a debug mode where metric messages are logged and not sent
 * Logs messages for network errors instead of blowing up
 
-Example
+Examples
 -------
 ```python
 import graphiteudp
@@ -19,10 +19,23 @@ import graphiteudp
 graphiteudp.init()
 graphiteudp.send("foo", 1)
 
-# Send to a specific host, add a prefix, and log messages instead of sending them.
-graphiteudp.init("graphite.example.com", prefix = "myapp", debug = True)
-# Generates log message: DEBUG 'myapp.bar.monkey 123.000000 1354307985\n' -> ('graphite.example.com', 2003)
+# Send to a specific host and add a prefix.
+graphiteudp.init("graphite.example.com", prefix = "myapp")
 graphiteudp.send("bar.monkey", 123)
+
+# The above will send "myapp.bar.monkey 123.000000 1354307985\n" to Graphite.
+```
+
+#### Debug logging
+If you'd like to just log a message for testing without sending anything, you can add the ```debug=True``` parameter to `init()`:
+
+```python
+graphiteudp.init("graphite.example.com", prefix="myapp", debug=True)
+
+graphiteudp.send("bar.monkey", 123)
+
+# With debug=True set above, calling .send will only log the message, like this:
+# DEBUG 'myapp.bar.monkey 123.000000 1354307985\n' -> ('graphite.example.com', 2003)
 ```
 
 #### For multiple modules in the same application, graphiteudp.init() only needs to be called once.
