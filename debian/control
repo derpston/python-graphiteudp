@@ -4,6 +4,7 @@ Priority: optional
 Maintainer: Derp Ston <derpston+packaging@sleepygeek.org>
 Build-Depends:
     debhelper (>= 6.0.0),
+    python-socketcache,
 Standards-Version: 3.9.1
 
 Package: python-graphiteudp
