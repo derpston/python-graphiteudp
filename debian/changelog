@@ -1,3 +1,9 @@
+python-graphiteudp (0.0.5) unstable; urgency=low
+
+  * Removing deprecated python-support deps for ubuntu 16.04
+
+ -- Derp Ston <derpston+packaging@sleepygeek.org>  Tue, 13 Mar 2018 15:11:00 +0000
+ 
 python-graphiteudp (0.0.2) unstable; urgency=low
 
   * Using python-socketcache to manage socket creation, DNS, etc, to avoid
