@@ -24,6 +24,12 @@ graphiteudp.init("graphite.example.com", prefix = "myapp")
 graphiteudp.send("bar.monkey", 123)
 
 # The above will send "myapp.bar.monkey 123.000000 1354307985\n" to Graphite.
+
+graphiteudp.send("bar.monkey", 123, False)
+
+# The above will send "myapp.bar.monkey 123.000000\n" to Graphite, allowing
+# the server to use the arrival time of the packet instead of specifying
+# a timestamp. Useful for embedded systems which may not keep accurate time.
 ```
 
 #### Debug logging

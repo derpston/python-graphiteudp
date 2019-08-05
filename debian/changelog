@@ -1,3 +1,9 @@
+python-graphiteudp (0.0.6) unstable; urgency=low
+
+  * Adding support for optional timestamp.
+
+ -- Derp Ston <derpston+packaging@sleepygeek.org>  Mon, 5 Aug 2019 13:00:00 +0000
+ 
 python-graphiteudp (0.0.5) unstable; urgency=low
 
   * Removing deprecated python-support deps for ubuntu 16.04

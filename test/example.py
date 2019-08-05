@@ -23,3 +23,6 @@ graphiteudp.send("foo3", 1.2)
 graphiteudp.init("example.com", 2005, prefix = "bzrt")
 graphiteudp.send("foo4", 1.2, 100)
 
+graphiteudp.init("example.com", 2005, prefix = "bzrt")
+graphiteudp.send("foo5", 1.2, False)
+

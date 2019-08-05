@@ -1,4 +1,4 @@
-__version__ = "0.0.5"
+__version__ = "0.0.6"
 
 import time
 import logging
@@ -20,10 +20,15 @@ class GraphiteUDPClient:
       self._debug = debug
 
    def send(self, metric, value, timestamp = None):
-      if timestamp is None:
-         timestamp = int(time.time())
+      if timestamp is False:
+         # Omit the timestamp and allow the Graphite server to use the time
+         # of arrival instead.
+         message = "%s %f\n" % (metric, value)
+      else:
+         if timestamp is None:
+            timestamp = int(time.time())
 
-      message = "%s %f %d\n" % (metric, value, timestamp)
+         message = "%s %f %d\n" % (metric, value, timestamp)
 
       if self._prefix is not None:
          message = self._prefix + "." + message
